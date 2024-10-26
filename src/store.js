@@ -14,8 +14,7 @@ export const userStore = create(
     colorMode: "light",
     setUserImage: (userImage) => set({ userImage: userImage }),
     setUserName: (userName) => set({ userName: userName }),
-    clear: () => set({ userName: "", userImage: "" }),
-    setColorMode: (colorMode) => set({ colorMode: colorMode }),
+    resetUser: () => set({ userName: "", userImage: "" }),
   }))
 );
 

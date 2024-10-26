@@ -10,13 +10,10 @@ import { userStore } from "@/store";
 
 export default function HomeComponent({ session }) {
   const router = useRouter();
-
-  const setUserName = userStore((state) => state.setUserName);
-  const setUserImage = userStore((state) => state.setUserImage);
+  
+  const { setUserName, setUserImage, userName, userImage} = userStore();
 
   if (session && session.user) {
-    console.log("session:: " + session);
-
     setUserName(session.user.name);
     setUserImage(session.user.image);
     router.push("/game");

@@ -4,20 +4,22 @@ import { useEffect, useState } from "react";
 import Board from "@/components/board";
 import ResetGameButton from "@/ui/resetGameButton";
 import LogoutButton from "@/ui/logoutButton";
+import { useRouter } from "next/navigation";
 
 import { userStore, gameStore } from "@/store";
 import "../../styles/game.css";
 import ScoreBox from "@/ui/scoreBox";
 
 import Stack from "@mui/system/Stack";
-import { Box, Grid } from "@mui/system";
+import { Box } from "@mui/system";
 import { boxNameStyle } from "@/styles/boxStyle";
-import { Modal } from "@mui/material";
-import { modalStyle } from "@/styles/modalStyle";
 import GameResultModal from "@/ui/gameResultModal";
 
 export default function Game() {
+  const router = useRouter();
+
   const [showDialog, setShowDialog] = useState(false);
+
   const closeModal = () => {
     setShowDialog(false);
     resetBoard();
@@ -37,7 +39,11 @@ export default function Game() {
     winStack
   } = gameStore();
 
-  const { userName } = userStore();
+  const {
+    resetUser,
+    userName,
+    userImage
+  } = userStore();
 
   useEffect(() => {
     if (winner) {
@@ -47,6 +53,12 @@ export default function Game() {
       }, 2000);
     }
   }, [winner]);
+
+  useEffect(() => {
+    if(!userName && !userImage){
+      router.push("/");
+    }
+  }, [resetUser]);
 
   return (
     <div className="flex-middle">
