@@ -8,6 +8,13 @@ export function getRandomIndex() {
   return Math.floor(Math.random() * 9);
 }
 
+export function getNewBoard() {
+  const newBoard = Array(9).fill('');
+  const randomIndex = Math.floor(Math.random() * 9); 
+  newBoard[randomIndex] = "X"; 
+  return newBoard;
+}
+
 export function checkWinner(board) {
   const winCondition = [
     [0, 1, 2],

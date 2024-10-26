@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { checkWinner, findBestMove, getSide } from "@/utils/gameUtils";
+import {
+  checkWinner,
+  findBestMove,
+  getNewBoard,
+  getSide,
+} from "@/utils/gameUtils";
 
 export const userStore = create(
   persist((set) => ({
@@ -15,7 +20,6 @@ export const userStore = create(
 );
 
 export const gameStore = create((set) => ({
-  gameRound: 1,
   userScore: 0,
   botScore: 0,
   tieScore: 0,
@@ -36,92 +40,94 @@ export const gameStore = create((set) => ({
       board: state?.board?.map((item, i) => (i === index ? value : item)),
       isUserTurn: false,
     })),
-  setWinner: (winner) => set({winner: winner}),
   checkWinnerAndUpdateScore: () =>
     set((state) => {
-      const winner = checkWinner(state.board);
+      if(state.winner){
+        return {winner: state.winner}
+      }
+      const findWinner = checkWinner(state.board);
 
-      switch (winner) {
+      switch (findWinner) {
         case "draw":
-      console.log("winner ::" + winner);
-
+          console.log('DRAW!!!!');
+          
           return {
             tieScore: state.tieScore + 1,
-            gameRound: state.gameRound + 1,
-            board: Array(9).fill(""),
             winner: "draw",
           };
         case "X":
         case "O":
-          const isUserWinner = winner === state.userSide;
-      console.log("winner ::" + winner);
+          const isUserWinner = findWinner === state.userSide;
 
           if (!isUserWinner) {
             return {
               botScore: state.botScore + 1,
               userScore: state.userScore - 1,
-              gameRound: state.gameRound + 1,
-              winner: state.botSide,
-              board: Array(9).fill(""),
-              userSide: state.botSide,
-              botSide: state.userSide,
+              winner: "bot",
+              winStack: 0,
             };
           }
           const isWinStackFull = state.winStack === 3;
+          console.log('check win stack : ' + isWinStackFull);
+          
           return {
             userScore: state.userScore + (isWinStackFull ? 2 : 1),
-            gameRound: state.gameRound + 1,
-            winner: state.userSide,
+            winner: "user",
             winStack: isWinStackFull ? 0 : state.winStack + 1,
-            board: Array(9).fill(""),
-            userSide: state.botSide,
-            botSide: state.userSide,
           };
       }
-      console.log("no winner");
-      
-      return {  };
+
+      return {};
     }),
   botMove: () =>
     set((state) => {
-      const botNextMove = findBestMove(
-        state.board,
-        state.userSide,
-        state.botSide
-      );
-      console.log("Bot move");
+      if (state.winner) {
+        setTimeout(() => {
+          set((state) => {
+            return state.userSide === "O"
+              ? { board: getNewBoard(), isUserTurn: true }
+              : { board: Array(9).fill(""), isUserTurn: false };
+          });
+        }, 2000);
+      } else {
+        const botNextMove = findBestMove(
+          state.board,
+          state.userSide,
+          state.botSide
+        );
 
-      return {
-        board: state?.board?.map((item, i) =>
-          i === botNextMove ? state.botSide : item
-        ),
-        isUserTurn: true,
-      };
+        return {
+          board: state?.board?.map((item, i) =>
+            i === botNextMove ? state.botSide : item
+          ),
+          isUserTurn: true,
+        };
+      }
+      return {}
     }),
   resetGame: () =>
     set(() => {
       const side = getSide();
       return {
-        gameRound: 1,
         userScore: 0,
         botScore: 0,
         tieScore: 0,
-        board: Array(9).fill(""),
+        board: side.player == "O" ? getNewBoard() : Array(9).fill(""),
         userSide: side.player,
         botSide: side.bot,
-        isUserTurn: side.player == "X",
+        isUserTurn: true,
         winner: null,
         winStack: 0,
       };
     }),
   resetBoard: () =>
-    set((state) => ({
-      gameRound: state.gameRound + 1,
-      board: Array(9).fill(""),
-      isUserTurn: state.botSide == "X",
-      userSide: state.botSide,
-      botSide: state.userSide,
-      winner: null,
-      winStack: 0,
-    })),
+    set((state) => {
+      return {
+        board: state.userSide == "X" ? getNewBoard() : Array(9).fill(""),
+        isUserTurn: true,
+        userSide: state.botSide,
+        botSide: state.userSide,
+        winner: null,
+      };
+    }),
 }));
