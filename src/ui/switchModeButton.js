@@ -1,10 +1,10 @@
 "use client";
 
-import { useStore } from "@/store";
+import { userStore } from "@/store";
 
 export default function SwitchModeButton() {
-  const colorMode = useStore((state) => state.colorMode);
-  const setColorMode = useStore((state) => state.setColorMode);
+  const colorMode = userStore((state) => state.colorMode);
+  const setColorMode = userStore((state) => state.setColorMode);
 
   const onClick = () => {
     if (colorMode == "light") {

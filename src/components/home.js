@@ -5,17 +5,16 @@ import LoginButton from "@/ui/loginButton";
 import PlayButton from "@/ui/playButton";
 import LogoutButton from "@/ui/logoutButton";
 import SwitchModeButton from "@/ui/SwitchModeButton";
-import { useStore } from "@/store";
+import { userStore } from "@/store";
 
 export default function HomeComponent({session}) {
 
-  const setUserName = useStore((state) => state.setUserName);
-  const setUserImage = useStore((state) => state.setUserImage);
+  const setUserName = userStore((state) => state.setUserName);
+  const setUserImage = userStore((state) => state.setUserImage);
 
   if (session && session.user){
     setUserName(session.user.name);
     setUserImage(session.user.image);
-    console.log('init');
   }
 
   return (
@@ -34,7 +33,7 @@ export default function HomeComponent({session}) {
             width={150}
             height={150}
           />
-          <PlayButton session={session} />
+          <PlayButton />
           <LogoutButton />
           <SwitchModeButton />
         </>
