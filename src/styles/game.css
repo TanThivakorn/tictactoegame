@@ -1,0 +1,45 @@
+.game-header {
+    padding-top: 3%;
+}
+
+.sign-out-button {
+    /* padding-left: 0%; */
+}
+
+.sign-out-container {
+    padding-top: 4%
+}
+
+.reset-button {
+    padding-top: 2%;
+}
+
+.board {
+    padding-top: 1%
+}
+
+.row-container {
+    display: flex;  
+    flex-direction: row;   
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.score-text {
+    font-size: 250%;
+}
+
+.score-stack {
+    padding-bottom: 1%;
+}
+
+.image-modal {
+    padding-top: 5%;
+    padding-bottom: 5%;
+}

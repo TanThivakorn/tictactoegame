@@ -1,10 +1,12 @@
 "use client";
 
 import { gameStore } from "@/store";
+import { Button } from "@mui/material";
+
+import "../styles/game.css";
+import { squareButtonStyle } from "@/styles/buttonStyle";
 
 export default function Square({ value }) {
-  const setBoard = gameStore((state) => state.setBoard);
-
   const {
     board,
     userSide,
@@ -12,16 +14,16 @@ export default function Square({ value }) {
     checkWinnerAndUpdateScore,
     botMove,
     isUserTurn,
+    setBoard,
   } = gameStore();
 
   const handelClick = () => {
+
     if (isUserTurn && !board[value] && !winner) {
       setBoard(value, userSide);
       checkWinnerAndUpdateScore();
 
       if (!winner && board.includes("")) {
-        console.log("bot move when click");
-
         botMove();
         checkWinnerAndUpdateScore();
       }
@@ -29,8 +31,8 @@ export default function Square({ value }) {
   };
 
   return (
-    <button className="square" onClick={handelClick}>
+    <Button sx={squareButtonStyle} onClick={handelClick}>
       {board[value]}
-    </button>
+    </Button>
   );
 }

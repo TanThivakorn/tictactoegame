@@ -1,0 +1,4 @@
+export const WINNING_GIF = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExcXA5bXIydTVhOGI5dTU3c2Z1amVnOXFnN25wamZieGxuZnd3M3hwOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MxYQrB9jeGzza/giphy.gif";
+export const WIN_STREAk_GIF = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjVlNXFoczVyeWVkOGN2Z2JicTNqMHIxc3h0Znc1dHlqcm9jd2hxbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/4fLr6kOk9uFrO/giphy.gif";
+export const LOSING_GIF = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd21tNWd2dnZyenE1OHduMmtqY3d4d3dxdjZ4Z2hoeWE0bjB5ZmVhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XkkaeT0OFlNVHlIIWY/giphy.gif";
+export const DRAW_GIF = "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDlhcXJwcG8yNmhweWFoOGZ4cjNoYmtkNWNncjV3eGx6MWliMjAydSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/dQx8nzM8Z1EJXbBqk3/giphy.gif";

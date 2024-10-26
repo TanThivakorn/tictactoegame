@@ -4,7 +4,7 @@ import Square from "@/components/square";
 
 export default function Board() {
   return (
-    <>
+    <div className="board">
       <div>
         <Square value={0} />
         <Square value={1} />
@@ -20,6 +20,6 @@ export default function Board() {
         <Square value={7} />
         <Square value={8} />
       </div>
-    </>
+    </div>
   );
 }
