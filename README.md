@@ -48,6 +48,4 @@ The app allows users to play Tic Tac Toe with bot and keeps track fo scores.
     npm run start
     ```
 
-## Learn More
-
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
