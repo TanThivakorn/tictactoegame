@@ -1,6 +1,6 @@
-import localFont from "next/font/local";
-import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+
+import "./globals.css";
 
 export const metadata = {
   title: "TIC-TAC-TOE",

@@ -1,6 +1,8 @@
 import { Modal } from "@mui/material";
 import { Box } from "@mui/system";
 
+import '../styles/game.css'
+
 import { modalStyle } from "@/styles/modalStyle";
 import {
   WINNING_GIF,
@@ -9,7 +11,6 @@ import {
   DRAW_GIF,
 } from "@/constants/constants";
 
-import '../styles/game.css'
 
 export default function GameResultModal({
   showDialog,

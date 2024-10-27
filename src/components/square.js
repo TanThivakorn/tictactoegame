@@ -1,10 +1,12 @@
 "use client";
 
-import { gameStore } from "@/store";
 import { Button } from "@mui/material";
 
 import "../styles/game.css";
+
 import { squareButtonStyle } from "@/styles/buttonStyle";
+import { gameStore } from "@/store";
+
 
 export default function Square({ value }) {
   const {

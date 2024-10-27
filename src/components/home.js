@@ -1,12 +1,13 @@
 "use client";
 
-import LoginButton from "@/ui/loginButton";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/navigation";
 
 import "../styles/home.css";
 
 import { userStore } from "@/store";
+import LoginButton from "@/ui/loginButton";
+
 
 export default function HomeComponent({ session }) {
   const router = useRouter();

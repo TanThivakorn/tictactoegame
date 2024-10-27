@@ -2,9 +2,10 @@
 
 import { Box } from "@mui/material";
 
-import { boxScoreStyle } from "@/styles/boxStyle";
-
 import "../styles/game.css"
+
+
+import { boxScoreStyle } from "@/styles/boxStyle";
 
 export default function ScoreBox({ side, score }) {
   return (

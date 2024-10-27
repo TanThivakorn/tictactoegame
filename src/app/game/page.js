@@ -1,22 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Stack from "@mui/system/Stack";
+import { Box } from "@mui/system";
+
+import "../../styles/game.css";
+
 import Board from "@/components/board";
 import ResetGameButton from "@/ui/resetGameButton";
 import LogoutButton from "@/ui/logoutButton";
-import { useRouter } from "next/navigation";
-
-import { userStore, gameStore } from "@/store";
-import "../../styles/game.css";
 import ScoreBox from "@/ui/scoreBox";
-
-import Stack from "@mui/system/Stack";
-import { Box } from "@mui/system";
-import { boxNameStyle } from "@/styles/boxStyle";
 import GameResultModal from "@/ui/gameResultModal";
+import { userStore, gameStore } from "@/store";
+import { boxNameStyle } from "@/styles/boxStyle";
 
 export default function Game() {
   const router = useRouter();
+
+  const {
+    userSide,
+    botSide,
+    botScore,
+    tieScore,
+    userScore,
+    winner,
+    resetBoard,
+    winStack,
+  } = gameStore();
+
+  const { resetUser, userName, userImage } = userStore();
 
   const [showDialog, setShowDialog] = useState(false);
 
@@ -28,23 +41,6 @@ export default function Game() {
     setShowDialog(true);
   };
 
-  const {
-    userSide,
-    botSide,
-    botScore,
-    tieScore,
-    userScore,
-    winner,
-    resetBoard,
-    winStack
-  } = gameStore();
-
-  const {
-    resetUser,
-    userName,
-    userImage
-  } = userStore();
-
   useEffect(() => {
     if (winner) {
       console.log("board reset !!");
@@ -55,7 +51,7 @@ export default function Game() {
   }, [winner]);
 
   useEffect(() => {
-    if(!userName && !userImage){
+    if (!userName && !userImage) {
       router.push("/");
     }
   }, [resetUser]);

@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@mui/material";
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 import { gameStore } from "@/store";
 import { buttonStyle } from "@/styles/buttonStyle";
-import RefreshIcon from '@mui/icons-material/Refresh';
 
 export default function ResetGameButton() {
 

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import HomeComponent from "@/components/home";
+
 import '../styles/home.css'
 
 export default async function Home() {
