@@ -9,9 +9,9 @@ export function getRandomIndex() {
 }
 
 export function getNewBoard() {
-  const newBoard = Array(9).fill('');
-  const randomIndex = Math.floor(Math.random() * 9); 
-  newBoard[randomIndex] = "X"; 
+  const newBoard = Array(9).fill("");
+  const randomIndex = Math.floor(Math.random() * 9);
+  newBoard[randomIndex] = "X";
   return newBoard;
 }
 
@@ -32,7 +32,7 @@ export function checkWinner(board) {
       return board[a];
     }
   }
-  return board.includes('') ? null : "draw";
+  return board.includes("") ? null : "draw";
 }
 
 function minimax(board, depth, isMaximizing, HUMAN, AI) {
@@ -67,22 +67,37 @@ function minimax(board, depth, isMaximizing, HUMAN, AI) {
 }
 
 export function findBestMove(board, HUMAN, AI) {
-  
-  let bestScore = -Infinity;
   let move;
+
   for (let i = 0; i < board.length; i++) {
-    if (board[i] === '') {
-      board[i] = AI;
-      const score = minimax(board, 0, false, HUMAN, AI);
-      board[i] = '';
-      if (score > bestScore) {
-        bestScore = score;
-        move = i;
+    if (board[i] === "") {
+      board[i] = HUMAN;
+      if (checkWinner(board) === "X") {
+        board[i] = ""; 
+        move = i; 
+        break;
+      }
+      board[i] = "";
+    }
+  }
+
+  if (move === undefined) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < board.length; i++) {
+      if (board[i] === "") {
+        board[i] = AI;
+        const score = minimax(board, 0, false, HUMAN, AI);
+        board[i] = "";
+        if (score > bestScore) {
+          bestScore = score;
+          move = i;
+        }
       }
     }
   }
+
   if (move === undefined) {
-    move = board.findIndex(cell => cell === '');
+    move = board.findIndex((cell) => cell === "");
   }
   return move;
 }
