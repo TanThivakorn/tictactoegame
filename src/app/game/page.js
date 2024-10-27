@@ -26,7 +26,7 @@ export default function Game() {
     userScore,
     winner,
     resetBoard,
-    winStack,
+    isUserGetBonus,
   } = gameStore();
 
   const { resetUser, userName, userImage } = userStore();
@@ -43,10 +43,9 @@ export default function Game() {
 
   useEffect(() => {
     if (winner) {
-      console.log("board reset !!");
       setTimeout(() => {
         openModal();
-      }, 2000);
+      }, 1500);
     }
   }, [winner]);
 
@@ -93,7 +92,7 @@ export default function Game() {
         showDialog={showDialog}
         closeModal={closeModal}
         winner={winner}
-        winstack={winStack}
+        isUserGetBonus={isUserGetBonus}
       />
     </div>
   );

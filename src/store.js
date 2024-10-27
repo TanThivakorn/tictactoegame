@@ -27,7 +27,7 @@ export const gameStore = create((set) => ({
   winner: null,
   winStack: 0,
   isUserTurn: true,
-  isGameActive: true,
+  isUserGetBonus: false,
   board: Array(9).fill(""),
   setUserSide: () =>
     set(() => {
@@ -48,8 +48,6 @@ export const gameStore = create((set) => ({
 
       switch (findWinner) {
         case "draw":
-          console.log('DRAW!!!!');
-          
           return {
             tieScore: state.tieScore + 1,
             winner: "draw",
@@ -66,13 +64,14 @@ export const gameStore = create((set) => ({
               winStack: 0,
             };
           }
-          const isWinStackFull = state.winStack === 3;
-          console.log('check win stack : ' + isWinStackFull);
+          const isWinStackFull = state.winStack === 2;
+          console.log('is win stack :' + isWinStackFull);
           
           return {
             userScore: state.userScore + (isWinStackFull ? 2 : 1),
             winner: "user",
             winStack: isWinStackFull ? 0 : state.winStack + 1,
+            isUserGetBonus: isWinStackFull
           };
       }
 
@@ -87,7 +86,7 @@ export const gameStore = create((set) => ({
               ? { board: getNewBoard(), isUserTurn: true }
               : { board: Array(9).fill(""), isUserTurn: false };
           });
-        }, 2000);
+        }, 1500);
       } else {
         const botNextMove = findBestMove(
           state.board,

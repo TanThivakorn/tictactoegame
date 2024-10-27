@@ -16,14 +16,13 @@ export default function GameResultModal({
   showDialog,
   closeModal,
   winner,
-  winstack,
+  isUserGetBonus,
 }) {
-  const bonusPoint = winstack == 3;
 
   const getImage = (winner) => {
     switch (winner) {
       case "user":
-        return !bonusPoint
+        return !isUserGetBonus
           ? {
               header: "YOU WIN!!",
               paragraph: "+1 Point",
@@ -50,7 +49,7 @@ export default function GameResultModal({
         return {
           header: "Unknown Result",
           paragraph: "Please check the game.",
-          image: null, // ใช้ภาพดีฟอลต์หรือ null
+          image: null,
         };
     }
   };
