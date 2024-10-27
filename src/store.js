@@ -12,7 +12,6 @@ export const userStore = create(
   persist((set) => ({
     userImage: "",
     userName: "",
-    colorMode: "light",
     setUserImage: (userImage) => set({ userImage: userImage }),
     setUserName: (userName) => set({ userName: userName }),
     resetUser: () => set({ userName: "", userImage: "" }),
