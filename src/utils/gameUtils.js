@@ -66,19 +66,25 @@ function minimax(board, isMaximizing, HUMAN, AI) {
   }
 }
 
-export function findBestMove(board, HUMAN, AI) {
-  let move;
-
+const findWinner = (board, player) => {
   for (let i = 0; i < board.length; i++) {
     if (board[i] === "") {
-      board[i] = HUMAN;
-      if (checkWinner(board) === "X") {
+      board[i] = player;
+      if (checkWinner(board) === player) {
         board[i] = "";
-        move = i;
-        break;
+        return i; 
       }
       board[i] = "";
     }
+  }
+  return undefined; 
+}
+
+export function findBestMove(board, HUMAN, AI) {
+  let move = findWinner(board,AI);
+
+  if(move === undefined){
+    move = findWinner(board,HUMAN);
   }
 
   if (move === undefined) {
@@ -99,5 +105,6 @@ export function findBestMove(board, HUMAN, AI) {
   if (move === undefined) {
     move = board.findIndex((cell) => cell === "");
   }
+  
   return move;
 }
