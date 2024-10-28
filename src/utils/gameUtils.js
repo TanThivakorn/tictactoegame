@@ -35,7 +35,7 @@ export function checkWinner(board) {
   return board.includes("") ? null : "draw";
 }
 
-function minimax(board, depth, isMaximizing, HUMAN, AI) {
+function minimax(board, isMaximizing, HUMAN, AI) {
   const winner = checkWinner(board);
   if (winner === AI) return 10 - depth;
   if (winner === HUMAN) return depth - 10;
@@ -46,7 +46,7 @@ function minimax(board, depth, isMaximizing, HUMAN, AI) {
     for (let i = 0; i < board.length; i++) {
       if (board[i] === "") {
         board[i] = AI;
-        const score = minimax(board, depth + 1, false);
+        const score = minimax(board, false);
         board[i] = "";
         maxScore = Math.max(maxScore, score);
       }
@@ -57,7 +57,7 @@ function minimax(board, depth, isMaximizing, HUMAN, AI) {
     for (let i = 0; i < board.length; i++) {
       if (board[i] === "") {
         board[i] = HUMAN;
-        const score = minimax(board, depth + 1, true);
+        const score = minimax(board, true);
         board[i] = "";
         minScore = Math.min(minScore, score);
       }
@@ -73,8 +73,8 @@ export function findBestMove(board, HUMAN, AI) {
     if (board[i] === "") {
       board[i] = HUMAN;
       if (checkWinner(board) === "X") {
-        board[i] = ""; 
-        move = i; 
+        board[i] = "";
+        move = i;
         break;
       }
       board[i] = "";
@@ -86,7 +86,7 @@ export function findBestMove(board, HUMAN, AI) {
     for (let i = 0; i < board.length; i++) {
       if (board[i] === "") {
         board[i] = AI;
-        const score = minimax(board, 0, false, HUMAN, AI);
+        const score = minimax(board, false, HUMAN, AI);
         board[i] = "";
         if (score > bestScore) {
           bestScore = score;
